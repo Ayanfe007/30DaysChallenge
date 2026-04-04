@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login page
+  </title>
+  <style>
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+    }
+.container{
+   background: linear-gradient(to right, #cf0808c0, #2d1fa7);
+  background-color: blue;
+  width: 800px;
+  height: 550px;
+  margin: 50px auto;/* Center the div*/
+  position: relative;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4); /* Adds a soft, dark shadow */
+  display: flex;
+}
+
+.SignIn{
+background-color: rgb(211, 206, 206);
+width: 400px;
+}
+label{
+  display: block;/*put the email on top of the password*/
+  font-weight: bold;
+  padding-bottom: 8px;
+  margin-left: 40px;
+}
+.email{
+  /* display the input at the front  display: inline; */
+}
+input{
+  height: 35px;
+  width: 300px;
+  border-radius: 10px;
+  border: 2px black;
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+input::placeholder{
+  font-size: 12px;
+  padding-left: 12px;
+}
+
+/* Container holding everything in that row */
+.form-actions {
+    display: flex;
+    justify-content: space-between; /* Pushes checkbox to the left, forgot password to the right */
+    align-items: center; /* Aligns them perfectly horizontally */
+    width: 300px; /* Matches the width of your input boxes */
+    margin-left: 40px; /* Aligns with your input boxes */
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+/* Container just for the checkbox and its label */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adds a tiny space between the box and the text */
+}
+
+.checkbox {
+    margin: 0; 
+    width: auto; /* THIS IS THE FIX: Stops it from being 300px wide! */
+    height: auto; 
+    cursor: pointer;
+}
+
+.remember {
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0; /* Overrides the global label margins */
+    padding: 0;
+    cursor: pointer;
+}
+
+.password {
+    font-size: 12px;
+    margin: 0;
+    cursor: pointer;
+}
+h2,h3{
+  margin-left: 10px;
+  padding-top: 10px;
+  /* THE TEXT GRADIENT MAGIC */
+    background: linear-gradient(to right, #236af0, #847b85); /* Cyan to Purple */
+    -webkit-background-clip: text;
+    color: transparent; 
+}
+.signin{
+  color: white;
+  background-color: blue;
+  margin-left: 40px;
+  height: 35px;
+  width: 300px;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.Or{
+  margin-left: 180px;
+  font-weight: bold;
+}
+.or{
+ display: flex;
+    align-items: center;
+    justify-content: center; /* Centers everything */
+    gap: 15px; /* Adds perfect spacing between the icon and the text */
+    
+    margin-left: 40px;
+    margin-bottom: 20px; /* Reduced slightly from 35px so they fit better */
+    height: 35px;
+    width: 300px;
+    border-radius: 15px;
+    border: 0;
+    cursor: pointer;
+    background-color: white; /* Make sure the button has a background */
+}
+.tooltip {
+ height: 20px; /* Shrunk slightly to fit the button better */
+    margin: 0; /* Removed your negative margin */
+}
+
+.pic{
+ width: 250px; /* Controls the image size nicely */
+    border-radius: 15px; /* Rounds the corners of the picture */
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.3); /* Adds a shadow to the picture too! */
+    margin-bottom: 40px;
+}
+.side{
+  width: 400px;
+    display: flex;
+    flex-direction: column; /* Stacks everything top to bottom */
+    align-items: center; /* Centers horizontally */
+    justify-content: center; /* Centers vertically */
+    padding: 20px;
+    box-sizing: border-box; /* Keeps padding inside the box */
+}
+.intro{
+color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.button-intro {
+    color: white;
+    font-weight: bold;
+}
+.signup-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.SignUp{
+font-weight: bold;
+    height: 35px;
+    width: 100px;
+    background-color: #cf0808; /* Changed to match your red gradient */
+    color: aliceblue;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+      <div class="SignIn">
+        <h2>Gb Wears</h2>
+        <h3>Sign in</h3>
+          <form action="Get">
+            <label for="email" class="email">Email</label>
+            <input type="email" placeholder="email">
+            <label for="password">Password</label>
+            <input type="password" placeholder="password">
+            <div class="form-actions">
+              <div class="checkbox-group">
+                <input type="checkbox" id="remember" class="checkbox">
+                <label for="remember" class="remember">Remember Me</label>
+              </div>
+                <p class="password"><u>Forgot Password?</u></p>
+            </div>
+            <button class="signin"> Log In</button>
+            <p class="Or">OR</p>
+            <button class="or">
+              <img src="gmail.png" alt="" class="tooltip">
+              Sign in with Google</button>
+            <button class="or">
+              <img src="facebook.png" alt="" class="tooltip">
+              Sign in with Facebook
+            </button>
+          </form>
+      </div>
+      <div class="side">
+        <p class="intro">Discover premium comfort with the world's leading underwear brand.</p>
+         <img src="download (3).jpg" alt="GB Wears Summer Collection" class="pic">
+    
+       <div class="signup-container">
+          <p class="button-intro">New to GB?</p>
+          <button class="SignUp">Sign Up</button>
+       </div>
+      </div>
+  </div>
+</body>
+</html>
