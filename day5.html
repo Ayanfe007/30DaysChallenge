@@ -192,6 +192,30 @@
     summary::marker {
         color: #236af0;
     }
+    /* --- RESPONSIVE MEDIA QUERIES (MOBILE FIX) --- */
+
+/* When the screen is smaller than 850px (Tablets & Phones) */
+@media (max-width: 850px) {
+    
+    /* 1. Stack the grid into 1 single column */
+    .container {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    /* 2. Stack the navbar logo and links so they don't squish */
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* 3. Make the image massive and beautiful on mobile */
+    .left img {
+        max-height: 400px; /* Prevents it from getting absurdly tall */
+        object-fit: cover; /* Keeps the proportions perfect */
+    }
+}
   </style>
 </head>
 <body>
