@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GB Wears - Premium Trunks</title>
+  <style>
+    /* 1. Global Reset & Body */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+    }
+
+    /* 2. Sticky Header (Copied from Day 4) */
+    header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        background-color: #236af0;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 15px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        height: 40px; 
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 30px; 
+        list-style: none; 
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none; 
+        font-weight: bold;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: #ffcc00; 
+    }
+
+    /* 3. The Asymmetrical Main Container */
+    .container {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 60px; /* Space between image and text */
+        max-width: 1100px;
+        margin: 60px auto; /* Centers the whole page */
+        padding: 0 20px;
+    }
+
+    /* 4. The Image Side (Left) */
+    .left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left img {
+        width: 100%;
+        border-radius: 15px; /* Gives it soft, premium corners */
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.1); /* Adds a soft shadow */
+    }
+
+    /* 5. The Details Side (Right) */
+    .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+    }
+
+    /* Typography Styling */
+    .right p:first-child { 
+        color: #888; 
+        font-weight: bold; 
+        letter-spacing: 1px; 
+        text-transform: uppercase; 
+        margin-bottom: 10px;
+    }
+
+    .right h1 { 
+        font-size: 38px; 
+        color: rgb(8, 1, 1); 
+        margin-bottom: 10px; 
+    }
+
+    .right h2 { 
+        font-size: 28px; 
+        color: #236af0; 
+        margin-bottom: 30px; 
+    }
+
+    /* 6. The Magic Custom Size Selector */
+    .sizes {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    /* Hide the ugly circle radio buttons entirely */
+    .sizes input[type="radio"] {
+        display: none; 
+    }
+
+    /* Style the labels to look like premium square buttons */
+    .sizes label {
+        display: inline-block;
+        padding: 10px 20px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        color: rgb(8, 1, 1);
+        transition: all 0.3s ease; /* Smooth color change */
+    }
+
+    /* THE MAGIC TRICK: Change color when the hidden radio is clicked */
+    .sizes input[type="radio"]:checked + label {
+        background-color: #236af0;
+        color: white;
+        border-color: #236af0;
+    }
+
+    /* 7. The Add to Cart Button */
+    .add-to-cart {
+        width: 100%; 
+        padding: 15px;
+        background-color: rgb(8, 1, 1); 
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 40px;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart:hover {
+        background-color: #236af0;
+    }
+
+    /* 8. The Native HTML Accordions */
+    .product-accordions { 
+        border-top: 1px solid #ccc; 
+    }
+
+    details { 
+        border-bottom: 1px solid #ccc; 
+        padding: 15px 0; 
+    }
+
+    summary { 
+        font-weight: bold; 
+        font-size: 16px; 
+        cursor: pointer; 
+        color: rgb(8, 1, 1);
+    }
+
+    /* Clean up the text inside the drop-downs */
+    details p, details ul { 
+        margin-top: 10px; 
+        color: #555; 
+        line-height: 1.5; 
+    }
+
+    details ul { 
+        margin-left: 20px; 
+    }
+
+    /* Clean up the arrow marker for older browsers */
+    summary::marker {
+        color: #236af0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <img class="logo" src="logo.png" alt="GB Wears Logo">
+      <ul class="nav-links">
+        <li><a href="day4.html">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    <div class="left">
+       <img src="boxers.jpg" alt="Premium Comfort Trunks">
+    </div>
+
+    <div class="right">
+      <p>GB Wears</p>
+      <h1>Premium Comfort Trunks</h1>
+      <h2>$22.00</h2>
+      
+      <div class="sizes">
+        <input type="radio" name="size" id="size-s">
+        <label for="size-s">S</label>
+
+        <input type="radio" name="size" id="size-m" checked> 
+        <label for="size-m">M</label>
+
+        <input type="radio" name="size" id="size-l">
+        <label for="size-l">L</label>
+
+        <input type="radio" name="size" id="size-xl">
+        <label for="size-xl">XL</label>
+      </div>
+
+      <button class="add-to-cart">Add to Cart</button>
+
+      <div class="product-accordions">
+    
+       <details open> 
+         <summary>Product Description</summary>
+         <p>Experience ultimate comfort with our Premium Trunks. Engineered with breathable, moisture-wicking fabric that moves with you throughout the day. Features a signature no-roll waistband and a supportive, frictionless contoured pouch.</p>
+       </details>
+
+       <details>
+         <summary>Materials & Care</summary>
+         <ul>
+            <li>95% Premium Egyptian Cotton, 5% Spandex</li>
+            <li>Machine wash cold with like colors</li>
+            <li>Tumble dry on low heat</li>
+            <li>Do not iron or bleach</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Shipping & Returns</summary>
+          <p><strong>Express Shipping:</strong> All orders process within 24 hours. Standard delivery takes 3-5 business days.</p>
+          <p><strong>The GB Guarantee:</strong> We offer a 30-day money-back guarantee. If they aren't the most comfortable trunks you've ever worn, send them back for a full refund—no questions asked.</p>
+        </details>
+
+      </div>
+      
+    </div>
+  </main>
+
+</body>
+</html>
