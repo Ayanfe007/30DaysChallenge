@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Shopping Cart</title>
+  <style>
+     * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+    }
+
+    /* 2. Sticky Header (Copied from Day 4) */
+    header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        background-color: #236af0;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 15px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        height: 40px; 
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 30px; 
+        list-style: none; 
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none; 
+        font-weight: bold;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: #ffcc00; 
+    }
+    /* --- 1. The Main Cart Layout --- */
+.cart-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Left side is wider than the right */
+    gap: 50px;
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+/* --- 2. The Cart Items (Left Side) --- */
+.cart-items h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: rgb(8, 1, 1);
+}
+
+/* Flexbox to put image, text, and buttons in a row */
+.item-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc; /* Line between items */
+}
+
+/* Style the tiny cart image */
+.item-row img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* This pushes the quantity buttons all the way to the right! */
+.item-details {
+    flex-grow: 1; 
+}
+
+.item-details h3 { font-size: 18px; margin-bottom: 5px; color: rgb(8, 1, 1); }
+.item-details p { color: #888; font-size: 14px; margin-bottom: 5px; font-weight: bold; }
+.item-details h4 { color: #236af0; font-size: 18px; }
+
+/* --- 3. The Quantity Buttons --- */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.quantity-control button {
+    background-color: #f4f4f9;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.quantity-control button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Hide the arrows inside the number input */
+.quantity-control input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    outline: none;
+}
+
+/* --- 4. The Order Summary (Right Side) --- */
+.order-summary {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.05); /* Premium soft shadow */
+    
+    /* This makes it stick to the screen when you scroll! */
+    position: sticky;
+    top: 100px; 
+    height: fit-content; 
+}
+
+.order-summary h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: rgb(8, 1, 1);
+}
+
+/* Flexbox to push text left and prices right */
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 16px;
+}
+
+/* The Grand Total Line */
+.summary-line.total {
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+    margin-top: 10px;
+    color: rgb(8, 1, 1);
+    font-size: 20px;
+}
+
+/* The Checkout Button */
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #236af0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #1a4eb8;
+}
+  </style>
+</head>
+<body>
+    <header>
+    <nav>
+      <img class="logo" src="logo.png" alt="GB Wears Logo">
+      <ul class="nav-links">
+        <li><a href="day4.html">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="cart-container">
+    
+    <div class="cart-items">
+        <h1>Your Shopping Bag</h1>
+        
+        <div class="item-row">
+            <img src="boxers.jpg" alt="Trunks">
+            <div class="item-details">
+                <h3>Premium Comfort Trunks</h3>
+                <p>Size: M</p>
+                <h4>$22.00</h4>
+            </div>
+            <div class="quantity-control">
+                <button>-</button>
+                <input type="number" value="1" min="1">
+                <button>+</button>
+            </div>
+        </div>
+        <div class="item-row">
+            <img src="image2.jpg" alt="Trunks">
+            <div class="item-details">
+                <h3>Premium Comfort Panties</h3>
+                <p>Size: M</p>
+                <h4>$12.00</h4>
+            </div>
+            <div class="quantity-control">
+                <button>-</button>
+                <input type="number" value="1" min="1">
+                <button>+</button>
+            </div>
+        </div>
+        </div>
+
+    <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-line">
+            <p>Subtotal</p>
+            <p>$32.00</p>
+        </div>
+        <div class="summary-line">
+            <p>Estimated Tax</p>
+            <p>$3.20</p>
+        </div>
+        <div class="summary-line total">
+            <h3>Total</h3>
+            <h3>$35.20</h3>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+
+</main>
+</body>
+</html>
