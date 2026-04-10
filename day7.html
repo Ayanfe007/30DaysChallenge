@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Page</title>
+  <style>
+     * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+    }
+
+    /* 2. Sticky Header (Copied from Day 4) */
+    header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        background-color: #236af0;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 15px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        height: 40px; 
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 30px; 
+        list-style: none; 
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none; 
+        font-weight: bold;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: #ffcc00; 
+    }
+    /* --- 1. Main Page Layout --- */
+    main {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .payment h1 {
+        font-size: 32px;
+        color: rgb(8, 1, 1);
+        margin-bottom: 30px;
+    }
+
+    /* THE MAIN GRID: Splits the Form (Left) and Summary (Right) */
+    .card {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 50px;
+    }
+
+    /* --- 2. Form Styling (The Left Side) --- */
+    .cardDetail {
+        background-color: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.05); /* Premium soft shadow */
+    }
+
+    .cardDetail  p {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 25px;
+        font-weight: bold;
+    }
+
+    /* Target all labels to sit neatly above the inputs */
+    form label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    /* Target all inputs to look clean and modern */
+    form input[type="text"] {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 25px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+        outline: none; /* Removes the ugly default blue outline */
+        transition: border-color 0.3s ease;
+    }
+
+    /* The "Glow" effect when a user clicks inside the text box */
+    form input[type="text"]:focus {
+        border-color: #236af0;
+        box-shadow: 0 0 5px rgba(35, 106, 240, 0.2);
+    }
+
+    /* --- 3. THE FLEXBOX MAGIC (Side-by-Side Inputs) --- */
+    .input-row {
+        display: flex;
+        gap: 20px;
+    }
+
+    .input-group {
+        flex: 1; /* Makes both inputs share the space exactly 50/50 */
+    }
+
+    /* --- 4. The Pay Button --- */
+    .pay-btn {
+        width: 100%;
+        padding: 16px;
+        background-color: rgb(8, 1, 1);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .pay-btn:hover {
+        background-color: #236af0; /* Changes to your brand blue on hover */
+    }
+
+    /* --- 5. Order Summary (The Right Side) --- */
+    .order {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.05);
+        height: fit-content;
+        position: sticky; /* Follows the user if they scroll! */
+        top: 100px;
+    }
+
+    .summary {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        font-weight: bold;
+        color: rgb(8, 1, 1);
+        font-size: 18px;
+    }
+
+    .product, .total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        color: #555;
+    }
+
+    .total p, .total span {
+        font-size: 16px;
+    }
+
+    /* Target the actual Grand Total text to make it stand out */
+    .total p:nth-of-type(2), .total span:nth-of-type(2) {
+        font-size: 20px;
+        font-weight: bold;
+        color: rgb(8, 1, 1);
+        margin-top: 15px;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+        width: 100%; /* Forces the line break */
+    }
+    
+    .total {
+        flex-wrap: wrap; /* Allows the Grand total to drop to the next line */
+    }
+
+    /* --- 6. Mobile Responsiveness --- */
+    @media (max-width: 850px) {
+        .card {
+            grid-template-columns: 1fr; /* Stacks the form and summary */
+        }
+        
+        .input-row {
+            flex-direction: column; /* Stacks the side-by-side inputs on tiny screens */
+            gap: 0;
+        }
+
+        nav {
+            flex-direction: column;
+            gap: 15px;
+        }
+    }
+  </style>
+</head>
+<body>
+    <header>
+    <nav>
+      <img class="logo" src="logo.png" alt="GB Wears Logo">
+      <ul class="nav-links">
+        <li><a href="day4.html">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    
+    <div class="payment">
+       <h1>Payment</h1>
+    </div>
+    <div class="card">
+      <div class="cardDetail">
+        <p>Please enter your card details:</p>
+<form>
+            <label for="Card_Number">Card Number</label>
+            <input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" id="Card_Number">
+            
+            <label for="Card_Holder">Card Holder</label>
+            <input type="text" placeholder="John Doe" id="Card_Holder">
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="Expiry">Expiry Date</label>
+                    <input type="text" placeholder="MM/YY" id="Expiry">
+                </div>
+                <div class="input-group">
+                    <label for="CVV">CVV</label>
+                    <input type="text" placeholder="000" id="CVV">
+                </div>
+            </div>
+
+            <label for="billing-address">Billing Address</label>
+            <input type="text" placeholder="Street Address" id="billing-address">
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="city">City</label>
+                    <input type="text" placeholder="City" id="city">
+                </div>
+                <div class="input-group">
+                    <label for="zip-code">Zip Code</label>
+                    <input type="text" placeholder="Zip Code" id="zip-code">
+                </div>
+            </div>
+
+            <input type="text" placeholder="Country" id="country">
+            
+            <button type="submit" class="pay-btn">Pay Now</button>
+        </form>
+      </div>
+      <div class="order">
+        <div class="summary">
+           <p>Order Summary</p>
+           <p>Product</p>
+        </div>
+        <div class="product">
+          <p> Premuin comfort Boxer</p>
+          <span>$23.00</span>
+        </div>
+        <div class="total">
+          <p>Delivery Fee</p>
+          <span> $12 </span>
+          <p>Total</p>
+          <span>$33.00</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
