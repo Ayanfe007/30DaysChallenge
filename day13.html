@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | GB Wear</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f8fafc;
+      color: #0f2a4a;
+    }
+
+    /* ========== HEADER ========== */
+    .settings-header {
+      background: #0f2a4a;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    .logo img {
+      height: 80px;
+      display: block;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-actions button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .header-actions img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fbbf24;
+    }
+
+    /* ========== WRAPPER ========== */
+    .settings-wrapper {
+      display: flex;
+      max-width: 1000px;
+      margin: 32px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* ========== HIDDEN RADIOS ========== */
+    .tab-radio {
+      display: none;
+      position: absolute;
+    }
+
+    /* ========== SIDEBAR ========== */
+    .settings-sidebar {
+      width: 240px;
+      background: #f1f5f9;
+      padding: 24px 16px;
+      border-right: 1px solid #e2e8f0;
+      flex-shrink: 0;
+    }
+    .settings-sidebar h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f2a4a;
+    }
+    .sidebar-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-weight: 500;
+      color: #475569;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-bottom: 4px;
+    }
+    .sidebar-label:hover {
+      background: #e2e8f0;
+    }
+
+    /* Active tab styling when radio is checked */
+    #profile-radio:checked ~ .settings-sidebar .label-profile,
+    #security-radio:checked ~ .settings-sidebar .label-security,
+    #notifications-radio:checked ~ .settings-sidebar .label-notifications,
+    #payment-radio:checked ~ .settings-sidebar .label-payment {
+      background: #0f2a4a;
+      color: white;
+    }
+
+    /* ========== CONTENT AREA ========== */
+    .settings-content {
+      flex: 1;
+      padding: 32px;
+      min-width: 0;
+    }
+
+    /* All panels hidden by default */
+    .tab-panel {
+      display: none;
+    }
+
+    /* Show panel only when matching radio is checked */
+    #profile-radio:checked ~ .settings-content #profile,
+    #security-radio:checked ~ .settings-content #security,
+    #notifications-radio:checked ~ .settings-content #notifications,
+    #payment-radio:checked ~ .settings-content #payment {
+      display: block;
+    }
+
+    /* Content styling */
+    .tab-panel h2 {
+      font-size: 22px;
+      margin-bottom: 24px;
+      font-weight: 700;
+      color: #0f2a4a;
+    }
+
+    /* ========== AVATAR UPLOAD (LABEL TRICK) ========== */
+    .avatar-upload {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .avatar-upload img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fbbf24;
+    }
+
+    /* THIS LABEL TRIGGERS THE FILE INPUT */
+    .btn-upload {
+      background: #0f2a4a;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-upload:hover {
+      background: #1e3a5f;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+    }
+    .form-group input:focus {
+      border-color: #fbbf24;
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+    }
+
+    .btn-save {
+      background: #fbbf24;
+      color: #0f2a4a;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .btn-save:hover {
+      background: #f59e0b;
+    }
+
+    /* Toggle switch */
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .setting-row h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .setting-row p {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .switch-label {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #cbd5e1;
+      border-radius: 26px;
+      transition: 0.2s;
+    }
+    .switch-label::before {
+      content: "";
+      position: absolute;
+      height: 22px;
+      width: 22px;
+      left: 2px;
+      bottom: 2px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    input:checked + .switch-label {
+      background: #fbbf24;
+    }
+    input:checked + .switch-label::before {
+      transform: translateX(24px);
+    }
+
+    /* Payment card */
+    .payment-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .card-type {
+      font-weight: 700;
+      color: #0f2a4a;
+    }
+    .card-number, .card-expiry {
+      font-family: monospace;
+      color: #475569;
+    }
+    .btn-remove {
+      background: none;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: #ef4444;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn-add {
+      background: transparent;
+      border: 2px dashed #cbd5e1;
+      color: #0f2a4a;
+      font-weight: 600;
+      padding: 10px 20px;
+      display: inline-block;
+      margin-top: 8px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .btn-add:hover {
+      border-color: #fbbf24;
+      color: #fbbf24;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .settings-wrapper {
+        flex-direction: column;
+        margin: 16px;
+      }
+      .settings-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .settings-sidebar h3 {
+        width: 100%;
+        margin-bottom: 12px;
+      }
+      .sidebar-label {
+        flex: 1;
+        justify-content: center;
+        margin-bottom: 0;
+        min-width: 120px;
+      }
+      .settings-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="settings-header">
+    <div class="logo">
+      <img src="logo2.png" alt="GB Wear logo">
+    </div>
+    <div class="header-actions">
+      <button>🔍</button>
+      <button>🛒</button>
+      <img src="ifemi.jpeg" alt="profile">
+    </div>
+  </header>
+
+  <!-- MAIN SETTINGS -->
+  <div class="settings-wrapper">
+
+    <!-- RADIOS -->
+    <input type="radio" name="settings-tab" id="profile-radio" class="tab-radio" checked>
+    <input type="radio" name="settings-tab" id="security-radio" class="tab-radio">
+    <input type="radio" name="settings-tab" id="notifications-radio" class="tab-radio">
+    <input type="radio" name="settings-tab" id="payment-radio" class="tab-radio">
+
+    <!-- SIDEBAR -->
+    <aside class="settings-sidebar">
+      <h3>Settings</h3>
+      <label for="profile-radio" class="sidebar-label label-profile">👤 Profile</label>
+      <label for="security-radio" class="sidebar-label label-security">🔒 Security</label>
+      <label for="notifications-radio" class="sidebar-label label-notifications">🔔 Notifications</label>
+      <label for="payment-radio" class="sidebar-label label-payment">💳 Payment</label>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="settings-content">
+
+      <!-- Profile -->
+      <section class="tab-panel" id="profile">
+        <h2>Profile Settings</h2>
+
+        <div class="avatar-upload">
+          <img src="IMG_6533.jpeg" alt="current avatar">
+          <!-- LABEL triggers the hidden file input -->
+          <label for="avatarInput" class="btn-upload">Change Photo</label>
+          <input type="file" id="avatarInput" hidden>
+        </div>
+
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="John Oyewole">
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="johnoyewole2020@gmail.com">
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+234 811 002 1735">
+        </div>
+
+        <button class="btn-save">Save Changes</button>
+      </section>
+
+      <!-- Security -->
+      <section class="tab-panel" id="security">
+        <h2>Security</h2>
+
+        <div class="form-group">
+          <label>Current Password</label>
+          <input type="password" placeholder="••••••••">
+        </div>
+
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" placeholder="••••••••">
+        </div>
+
+        <div class="form-group">
+          <label>Two-Factor Authentication</label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="2fa">
+            <label for="2fa" class="switch-label"></label>
+          </div>
+        </div>
+
+        <button class="btn-save">Update Security</button>
+      </section>
+
+      <!-- Notifications -->
+      <section class="tab-panel" id="notifications">
+        <h2>Notifications</h2>
+
+        <div class="setting-row">
+          <div>
+            <h4>Order Updates</h4>
+            <p>Get notified when your order ships</p>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="orders" checked>
+            <label for="orders" class="switch-label"></label>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h4>Promotional Emails</h4>
+            <p>Receive offers and discounts</p>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="promos">
+            <label for="promos" class="switch-label"></label>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h4>SMS Alerts</h4>
+            <p>Text messages for delivery updates</p>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="sms" checked>
+            <label for="sms" class="switch-label"></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Payment -->
+      <section class="tab-panel" id="payment">
+        <h2>Payment Methods</h2>
+
+        <div class="payment-card">
+          <div class="card-info">
+            <span class="card-type">VISA</span>
+            <span class="card-number">•••• •••• •••• 4242</span>
+            <span class="card-expiry">Exp: 12/27</span>
+          </div>
+          <button class="btn-remove">Remove</button>
+        </div>
+
+        <button class="btn-add">+ Add New Card</button>
+      </section>
+
+    </main>
+  </div>
+
+</body>
+</html>
