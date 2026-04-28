@@ -3,228 +3,345 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GB Wears - Premium Trunks</title>
+  <title>Premium Comfort Trunks | GB Wear</title>
   <style>
     /* 1. Global Reset & Body */
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #0f2a4a;
     }
 
-    /* 2. Sticky Header (Copied from Day 4) */
+    /* 2. Sticky Header */
     header {
-        position: sticky;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 100;
-        background-color: #236af0;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background-color: #0f2a4a;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     nav {
-        display: flex;
-        justify-content: space-between; 
-        align-items: center; 
-        padding: 15px 40px;
-        max-width: 1200px;
-        margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .logo {
-        height: 40px; 
+      height: 80px;
     }
 
     .nav-links {
-        display: flex;
-        gap: 30px; 
-        list-style: none; 
+      display: flex;
+      gap: 28px;
+      list-style: none;
     }
 
     .nav-links a {
-        color: white;
-        text-decoration: none; 
-        font-weight: bold;
-        font-size: 16px;
-        transition: color 0.3s ease;
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.2s ease;
     }
 
     .nav-links a:hover {
-        color: #ffcc00; 
+      color: #fbbf24;
     }
 
-    /* 3. The Asymmetrical Main Container */
-    .container {
-        display: grid;
-        grid-template-columns: 3fr 2fr;
-        gap: 60px; /* Space between image and text */
-        max-width: 1100px;
-        margin: 60px auto; /* Centers the whole page */
-        padding: 0 20px;
+    /* 3. Main product layout */
+    .product-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 24px;
     }
 
-    /* 4. The Image Side (Left) */
-    .left {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    /* 4. Image side */
+    .product-gallery {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
 
-    .left img {
-        width: 100%;
-        border-radius: 15px; /* Gives it soft, premium corners */
-        box-shadow: 0px 10px 30px rgba(0,0,0,0.1); /* Adds a soft shadow */
+    .product-gallery img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
     }
 
-    /* 5. The Details Side (Right) */
-    .right {
-        display: flex;
-        flex-direction: column;
-        justify-content: center; 
+    /* 5. Details side */
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    /* Typography Styling */
-    .right p:first-child { 
-        color: #888; 
-        font-weight: bold; 
-        letter-spacing: 1px; 
-        text-transform: uppercase; 
-        margin-bottom: 10px;
+    .brand-label {
+      color: #64748b;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 8px;
     }
 
-    .right h1 { 
-        font-size: 38px; 
-        color: rgb(8, 1, 1); 
-        margin-bottom: 10px; 
+    .product-title {
+      font-size: 34px;
+      font-weight: 700;
+      color: #0f2a4a;
+      line-height: 1.2;
+      margin-bottom: 10px;
     }
 
-    .right h2 { 
-        font-size: 28px; 
-        color: #236af0; 
-        margin-bottom: 30px; 
+    .product-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-bottom: 24px;
     }
 
-    /* 6. The Magic Custom Size Selector */
-    .sizes {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 30px;
+    /* 6. Size selector */
+    .size-selector {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
     }
 
-    /* Hide the ugly circle radio buttons entirely */
-    .sizes input[type="radio"] {
-        display: none; 
+    .size-selector input[type="radio"] {
+      display: none;
     }
 
-    /* Style the labels to look like premium square buttons */
-    .sizes label {
-        display: inline-block;
-        padding: 10px 20px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-        color: rgb(8, 1, 1);
-        transition: all 0.3s ease; /* Smooth color change */
+    .size-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #0f2a4a;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: white;
     }
 
-    /* THE MAGIC TRICK: Change color when the hidden radio is clicked */
-    .sizes input[type="radio"]:checked + label {
-        background-color: #236af0;
-        color: white;
-        border-color: #236af0;
+    .size-label:hover {
+      border-color: #fbbf24;
+      background: #fef9e7;
     }
 
-    /* 7. The Add to Cart Button */
+    .size-selector input[type="radio"]:checked + .size-label {
+      background: #fbbf24;
+      border-color: #fbbf24;
+      color: #0f2a4a;
+      font-weight: 700;
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.25);
+    }
+
+    /* 7. Add-to-cart button */
     .add-to-cart {
-        width: 100%; 
-        padding: 15px;
-        background-color: rgb(8, 1, 1); 
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-bottom: 40px;
-        transition: background-color 0.3s ease;
+      width: 100%;
+      padding: 15px 0;
+      background-color: #fbbf24;
+      color: #0f2a4a;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-bottom: 36px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .add-to-cart:hover {
-        background-color: #236af0;
+      background-color: #f59e0b;
+      transform: translateY(-1px);
+    }
+    .add-to-cart:active {
+      transform: scale(0.98);
     }
 
-    /* 8. The Native HTML Accordions */
-    .product-accordions { 
-        border-top: 1px solid #ccc; 
+    /* 8. Accordions */
+    .product-accordions {
+      border-top: 1px solid #e2e8f0;
     }
 
-    details { 
-        border-bottom: 1px solid #ccc; 
-        padding: 15px 0; 
+    details {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 0;
     }
 
-    summary { 
-        font-weight: bold; 
-        font-size: 16px; 
-        cursor: pointer; 
-        color: rgb(8, 1, 1);
+    summary {
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      color: #0f2a4a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
     }
 
-    /* Clean up the text inside the drop-downs */
-    details p, details ul { 
-        margin-top: 10px; 
-        color: #555; 
-        line-height: 1.5; 
+    summary::after {
+      content: "▾";
+      font-size: 14px;
+      color: #fbbf24;
+      transition: transform 0.2s;
+    }
+    details[open] summary::after {
+      transform: rotate(180deg);
     }
 
-    details ul { 
-        margin-left: 20px; 
+    details p,
+    details ul {
+      margin-top: 12px;
+      color: #475569;
+      line-height: 1.6;
+      font-size: 14px;
     }
 
-    /* Clean up the arrow marker for older browsers */
-    summary::marker {
-        color: #236af0;
-    }
-    /* --- RESPONSIVE MEDIA QUERIES (MOBILE FIX) --- */
-
-/* When the screen is smaller than 850px (Tablets & Phones) */
-@media (max-width: 850px) {
-    
-    /* 1. Stack the grid into 1 single column */
-    .container {
-        grid-template-columns: 1fr; 
-        gap: 30px;
-        margin-top: 30px;
+    details ul {
+      margin-left: 20px;
     }
 
-    /* 2. Stack the navbar logo and links so they don't squish */
-    nav {
+    details strong {
+      color: #0f2a4a;
+    }
+
+    /* ========== FOOTER ========== */
+    .site-footer {
+      background: #0f2a4a;
+      color: #e2e8f0;
+      margin-top: 60px;
+      padding: 40px 24px 20px;
+    }
+
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    /* Contact column */
+    .footer-contact {
+      flex: 1 1 250px;
+    }
+    .footer-contact h3 {
+      color: #fbbf24;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+    .contact-line span {
+      color: #fbbf24;
+    }
+
+    /* Link columns */
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      flex: 2 1 500px;
+      justify-content: space-around;
+    }
+    .footer-col h4 {
+      color: #fbbf24;
+      font-size: 14px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .footer-col a {
+      display: block;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 6px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: white;
+    }
+
+    /* Bottom bar */
+    .footer-bottom {
+      border-top: 1px solid #334155;
+      margin-top: 30px;
+      padding-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .footer-bottom p {
+      color: #94a3b8;
+    }
+    .social-icons {
+      display: flex;
+      gap: 12px;
+    }
+    .social-icons a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 20px;
+      transition: color 0.2s;
+    }
+    .social-icons a:hover {
+      color: #fbbf24;
+    }
+
+    /* Responsive for footer */
+    @media (max-width: 768px) {
+      .footer-content {
         flex-direction: column;
-        gap: 15px;
+        text-align: center;
+      }
+      .footer-links {
+        justify-content: center;
+        text-align: center;
+      }
+      .footer-bottom {
+        flex-direction: column;
+      }
     }
-
-    /* 3. Make the image massive and beautiful on mobile */
-    .left img {
-        max-height: 400px; /* Prevents it from getting absurdly tall */
-        object-fit: cover; /* Keeps the proportions perfect */
-    }
-}
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
     <nav>
-      <img class="logo" src="logo.png" alt="GB Wears Logo">
+      <img class="logo" src="logo2.png" alt="GB Wear Logo">
       <ul class="nav-links">
-        <li><a href="day4.html">Home</a></li>
+        <li><a href="#">Home</a></li>
         <li><a href="#">Shop</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
@@ -232,43 +349,44 @@
     </nav>
   </header>
 
-  <main class="container">
+  <main class="product-container">
     
-    <div class="left">
-       <img src="boxers.jpg" alt="Premium Comfort Trunks">
+    <!-- Product Image -->
+    <div class="product-gallery">
+      <img src="boxers.jpg" alt="Premium Comfort Trunks">
     </div>
 
-    <div class="right">
-      <p>GB Wears</p>
-      <h1>Premium Comfort Trunks</h1>
-      <h2>$22.00</h2>
+    <!-- Product Info -->
+    <div class="product-info">
+      <p class="brand-label">GB Wear</p>
+      <h1 class="product-title">Premium Comfort Trunks</h1>
+      <p class="product-price">$22.00</p>
       
-      <div class="sizes">
+      <div class="size-selector">
         <input type="radio" name="size" id="size-s">
-        <label for="size-s">S</label>
+        <label class="size-label" for="size-s">S</label>
 
-        <input type="radio" name="size" id="size-m" checked> 
-        <label for="size-m">M</label>
+        <input type="radio" name="size" id="size-m" checked>
+        <label class="size-label" for="size-m">M</label>
 
         <input type="radio" name="size" id="size-l">
-        <label for="size-l">L</label>
+        <label class="size-label" for="size-l">L</label>
 
         <input type="radio" name="size" id="size-xl">
-        <label for="size-xl">XL</label>
+        <label class="size-label" for="size-xl">XL</label>
       </div>
 
       <button class="add-to-cart">Add to Cart</button>
 
       <div class="product-accordions">
-    
-       <details open> 
-         <summary>Product Description</summary>
-         <p>Experience ultimate comfort with our Premium Trunks. Engineered with breathable, moisture-wicking fabric that moves with you throughout the day. Features a signature no-roll waistband and a supportive, frictionless contoured pouch.</p>
-       </details>
+        <details open>
+          <summary>Product Description</summary>
+          <p>Experience ultimate comfort with our Premium Trunks. Engineered with breathable, moisture-wicking fabric that moves with you throughout the day. Features a signature no-roll waistband and a supportive, frictionless contoured pouch.</p>
+        </details>
 
-       <details>
-         <summary>Materials & Care</summary>
-         <ul>
+        <details>
+          <summary>Materials & Care</summary>
+          <ul>
             <li>95% Premium Egyptian Cotton, 5% Spandex</li>
             <li>Machine wash cold with like colors</li>
             <li>Tumble dry on low heat</li>
@@ -281,11 +399,61 @@
           <p><strong>Express Shipping:</strong> All orders process within 24 hours. Standard delivery takes 3-5 business days.</p>
           <p><strong>The GB Guarantee:</strong> We offer a 30-day money-back guarantee. If they aren't the most comfortable trunks you've ever worn, send them back for a full refund—no questions asked.</p>
         </details>
-
       </div>
-      
     </div>
   </main>
+
+  <!-- ===== COMPLETE E‑COMMERCE FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <!-- Contact section -->
+      <div class="footer-contact">
+        <h3>Need Help?</h3>
+        <div class="contact-line">
+          <span>📞</span>
+          <span>+234 811 002 1735</span>
+        </div>
+        <div class="contact-line">
+          <span>✉️</span>
+          <span>johnoyewole2020@gmail.com</span>
+        </div>
+      </div>
+
+      <!-- Link columns -->
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <a href="day14.html">Help Center</a>
+          <a href="#">Shipping Policy</a>
+          <a href="#">Returns & Refunds</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar with social icons -->
+    <div class="footer-bottom">
+      <p>&copy; 2026 GB Wear. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook">f</a>   <!-- You can replace with SVG or icon fonts later -->
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="Instagram">📷</a>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>

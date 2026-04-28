@@ -3,140 +3,569 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 3: E-commerce Product Card</title>
+  <title>GB Wears | Premium Underwear</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, Helvetica, sans-serif; /* Cleaner font for modern stores */
-      background-color: #f4f4f9; /* Soft background so the card pops */
-      display: flex;
-      justify-content: center; /* Centers the card on the screen */
-      padding-top: 50px;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background-color: #f8fafc;
+      color: #0f2a4a;
     }
 
-    .container {
-      background-color: rgb(8, 1, 1);
-      width: 280px; /* Made it slightly wider to fit everything nicely */
-      border-radius: 20px; /* Softened the corners */
+    /* ========== NAVIGATION ========== */
+    .navbar {
+      background: #0f2a4a;
+      padding: 16px 24px;
       display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo img {
+      height: 80px;
+    }
+    .logo span {
+      color: #fbbf24;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #fbbf24;
+    }
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .nav-icons a {
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
       position: relative;
-      /* A softer, more realistic drop shadow */
-      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15); 
-      
-      /* THIS IS NEW: Tells the browser to animate changes smoothly */
-      transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: #fbbf24;
+      color: #0f2a4a;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* THIS IS NEW: The hover state for the whole card */
-    .container:hover {
-      transform: translateY(-10px); /* Lifts the card up 10 pixels */
-      box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.25); /* Makes shadow bigger when lifted */
+    /* ========== HERO SECTION ========== */
+    .hero {
+      background: #0f2a4a;
+      color: white;
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .hero h1 span {
+      color: #fbbf24;
+    }
+    .hero p {
+      font-size: 18px;
+      color: #cbd5e1;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-btn {
+      background: #fbbf24;
+      color: #0f2a4a;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+    .hero-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+    }
+
+    /* ========== FEATURES BAR ========== */
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 24px;
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* ========== PRODUCTS SECTION ========== */
+    .products-section {
+      max-width: 1200px;
+      margin: 48px auto;
+      padding: 0 24px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .section-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .section-header a {
+      color: #0f2a4a;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* ========== PRODUCT GRID ========== */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    /* ========== PRODUCT CARD (Your Day 3, Upgraded) ========== */
+    .product-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 32px rgba(15, 42, 74, 0.15);
     }
 
     .img-container {
       width: 100%;
-      height: 250px;
-      background-color: white; /* Keeps image background clean */
+      height: 280px;
+      background: #f1f5f9;
+      position: relative;
+      overflow: hidden;
     }
-
-    img {
-      height: 100%;
+    .img-container img {
       width: 100%;
-      /* THIS IS NEW: Stops the image from stretching! */
-      object-fit: cover; 
+      height: 100%;
+      object-fit: cover;
       display: block;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover .img-container img {
+      transform: scale(1.05);
     }
 
-    .sale {
+    .sale-badge {
       position: absolute;
-      background-color: #236af0; /* Matched your brand blue from Day 2 */
+      top: 16px;
+      left: 16px;
+      background: #ef4444;
       color: white;
-      padding: 5px 15px;
+      padding: 6px 16px;
       border-radius: 20px;
-      border: none;
-      font-weight: bold;
-      top: 15px;
-      left: 15px;
       font-size: 12px;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
+      z-index: 2;
     }
 
-    .text {
-      color: white;
-      padding: 20px; /* Gives the text room to breathe inside the black box */
+    .wishlist-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: white;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
       display: flex;
-      flex-direction: column;
-      align-items: center; /* Centers all text and buttons */
-      text-align: center;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.2s;
+    }
+    .wishlist-btn:hover {
+      background: #fee2e2;
+      transform: scale(1.1);
     }
 
+    .product-info {
+      padding: 20px;
+    }
     .brand {
-      margin: 0;
       font-size: 12px;
-      color: #aaa; /* Gray text for the brand name */
+      color: #fbbf24;
       text-transform: uppercase;
       letter-spacing: 2px;
+      font-weight: 700;
     }
-
-    h3 {
-      margin: 10px 0;
+    .product-name {
       font-size: 18px;
+      font-weight: 700;
+      margin: 8px 0;
+      color: #0f2a4a;
+    }
+    .product-meta {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 12px;
     }
 
-    /* THIS IS NEW: Pricing layout */
     .pricing {
-      margin-bottom: 20px;
-      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
     }
-
     .old-price {
-      color: #888;
-      text-decoration: line-through; /* Puts a line through the old price */
-      margin-right: 10px;
+      color: #94a3b8;
+      text-decoration: line-through;
+      font-size: 14px;
     }
-
     .new-price {
-      color: #236af0; /* Brand blue for the sale price */
-      font-weight: bold;
-      font-size: 20px;
+      color: #0f2a4a;
+      font-weight: 800;
+      font-size: 22px;
     }
 
-    .add {
-      height: 40px;
-      width: 100%; /* Makes button fill the width of the text box */
+    .add-to-cart {
+      width: 100%;
+      padding: 12px;
       border-radius: 8px;
-      background-color: #236af0;
+      background: #0f2a4a;
       color: white;
       border: none;
-      font-weight: bold;
-      cursor: pointer; /* Turns mouse into a clicking hand */
-      transition: background-color 0.3s ease; /* Smooth color change */
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+    .add-to-cart:hover {
+      background: #fbbf24;
+      color: #0f2a4a;
     }
 
-    /* THIS IS NEW: Button hover effect */
-    .add:hover {
-      background-color: #1a4eb8; /* Slightly darker blue when hovered */
+    /* ========== NEWSLETTER ========== */
+    .newsletter {
+      background: #0f2a4a;
+      color: white;
+      text-align: center;
+      padding: 64px 24px;
+      margin-top: 64px;
+    }
+    .newsletter h2 {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    .newsletter p {
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 15px;
+    }
+    .newsletter-form button {
+      padding: 14px 24px;
+      background: #fbbf24;
+      color: #0f2a4a;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ========== FOOTER ========== */
+    .site-footer {
+      background: #0f2a4a;
+      color: #cbd5e1;
+      padding: 48px 24px 24px;
+      border-top: 1px solid #1e3a5f;
+    }
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .footer-col h4 {
+      color: #fbbf24;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block;
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-bottom: 10px;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: white;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid #1e3a5f;
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    /* ========== MOBILE ========== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hero h1 {
+        font-size: 32px;
+      }
+      .features {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+      .newsletter-form {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="img-container">
-       <button class="sale">Sale</button>
-       <img src="boxers.jpg" alt="Premium Comfort Trunks">
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="logo2.png" alt="GB Wears">
+      <span>GB WEARS</span>
     </div>
-    
-    <div class="text">
-      <p class="brand">Gb Wears</p>
-      <h3>Premium Comfort Trunks</h3> <div class="pricing">
-          <span class="old-price">$30.00</span>
-          <span class="new-price">$22.00</span>
+    <ul class="nav-links">
+      <li><a href="#">New Arrivals</a></li>
+      <li><a href="#">Men</a></li>
+      <li><a href="#">Women</a></li>
+      <li><a href="#">Sale</a></li>
+    </ul>
+    <div class="nav-icons">
+      <a href="#">🔍</a>
+      <a href="#">👤</a>
+      <a href="#">
+        🛒
+        <span class="cart-count">2</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Premium Comfort, <span>Every Day</span></h1>
+    <p>Handcrafted underwear designed for the modern Nigerian. Quality fabrics, perfect fit, delivered to your door.</p>
+    <a href="#shop" class="hero-btn">Shop Now</a>
+  </section>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="feature">🚚 Free Delivery Lagos</div>
+    <div class="feature">↩️ 14-Day Returns</div>
+    <div class="feature">🔒 Secure Payment</div>
+    <div class="feature">⭐ Premium Quality</div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="products-section" id="shop">
+    <div class="section-header">
+      <h2>Best Sellers</h2>
+      <a href="#">View All →</a>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- Product 1: Your Original Card -->
+      <div class="product-card">
+        <div class="img-container">
+          <span class="sale-badge">Sale</span>
+          <button class="wishlist-btn">🤍</button>
+          <img src="boxers.jpg" alt="Premium Comfort Trunks">
+        </div>
+        <div class="product-info">
+          <p class="brand">GB Wears</p>
+          <h3 class="product-name">Premium Comfort Trunks</h3>
+          <p class="product-meta">Cotton · Sizes S-XXL</p>
+          <div class="pricing">
+            <span class="old-price">₦15,000</span>
+            <span class="new-price">₦11,000</span>
+          </div>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
       </div>
 
-      <button class="add">ADD TO CART</button>
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="img-container">
+          <button class="wishlist-btn">🤍</button>
+          <img src="boxers2.jpg" alt="Classic Boxer Briefs">
+        </div>
+        <div class="product-info">
+          <p class="brand">GB Wears</p>
+          <h3 class="product-name">Classic Boxer Briefs (3-Pack)</h3>
+          <p class="product-meta">Bamboo Blend · Black/Grey/Navy</p>
+          <div class="pricing">
+            <span class="new-price">₦18,500</span>
+          </div>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="img-container">
+          <span class="sale-badge">-20%</span>
+          <button class="wishlist-btn">🤍</button>
+          <img src="singlet.jpg" alt="Athletic Fit V-Neck">
+        </div>
+        <div class="product-info">
+          <p class="brand">GB Wears</p>
+          <h3 class="product-name">Athletic Fit V-Neck</h3>
+          <p class="product-meta">Moisture Wicking · Gym Ready</p>
+          <div class="pricing">
+            <span class="old-price">₦8,000</span>
+            <span class="new-price">₦6,400</span>
+          </div>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <div class="img-container">
+          <button class="wishlist-btn">🤍</button>
+          <img src="lounge.jpg" alt="Cotton Lounge Shorts">
+        </div>
+        <div class="product-info">
+          <p class="brand">GB Wears</p>
+          <h3 class="product-name">Cotton Lounge Shorts</h3>
+          <p class="product-meta">Relaxed Fit · Perfect for Sleep</p>
+          <div class="pricing">
+            <span class="new-price">₦9,500</span>
+          </div>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <h2>Join the GB Wears Family</h2>
+    <p>Get exclusive offers, new drops, and styling tips delivered to your inbox.</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email">
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#">New Arrivals</a>
+        <a href="#">Best Sellers</a>
+        <a href="#">Sale</a>
+        <a href="#">Gift Cards</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="#">Track Order</a>
+        <a href="#">Shipping Info</a>
+        <a href="#">Returns</a>
+        <a href="#">Size Guide</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Sustainability</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:johnoyewole2020@gmail.com">johnoyewole2020@gmail.com</a>
+        <a href="tel:+2348110021735">+234 811 002 1735</a>
+        <a href="#">Lagos, Nigeria</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 GB Wears. All rights reserved. Designed with 💛 in Nigeria.</p>
+    </div>
+  </footer>
+
 </body>
 </html>
