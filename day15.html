@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | GB Wears</title>
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: #0f2a4a;
+  text-align: center;
+  padding: 24px;
+}
+
+/* No white card — dark sleek background shows through */
+.error-container {
+  max-width: 500px;
+  width: 100%;
+}
+
+.floating-icon {
+  animation: float 3s ease-in-out infinite;
+  font-size: 80px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.error-code {
+  font-size: 150px;
+  font-weight: 800;
+  color: #fbbf24;
+  text-shadow: 0 0 60px rgba(251, 191, 36, 0.4);
+  line-height: 1;
+  margin: 0 0 16px 0;
+}
+
+.error-title {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.error-message {
+  color: #94a3b8;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.error-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: #fbbf24;
+  color: #0f2a4a;
+}
+
+.btn-primary:hover {
+  background: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #fbbf24;
+  color: #fbbf24;
+}
+
+.btn-outline:hover {
+  background: #fbbf24;
+  color: #0f2a4a;
+  transform: translateY(-2px);
+}
+  </style>
+</head>
+<body>
+
+  <div class="error-container">
+    
+    <div class="floating-icon">👻</div>
+    
+    <h1 class="error-code">404</h1>
+    
+    <h2 class="error-title">Page Not Found</h2>
+    
+    <p class="error-message">
+      Oops! Looks like this page wandered off like a loose boxer brief in the wind.
+    </p>
+    
+    <div class="error-actions">
+      <a href="day4.html" class="btn btn-primary">🏠 Back to Homepage</a>
+      <a href="day4.html" class="btn btn-outline">🛒 Continue Shopping</a>
+    </div>
+    
+  </div>
+
+</body>
+</html>
